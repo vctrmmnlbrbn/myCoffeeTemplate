@@ -20,6 +20,7 @@
     }
 
     html { scroll-behavior: smooth; }
+    html, body { width: 100%; overflow-x: hidden; }
 
     body {
       font-family: 'Cormorant Garamond', serif;
@@ -42,7 +43,7 @@
 
     /* NAV */
     nav {
-      position: fixed; top: 0; width: 100%; z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; width: 100%; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.4rem 3.5rem;
       mix-blend-mode: normal;
@@ -63,7 +64,7 @@
     .nav-logo span { color: var(--caramel); }
     nav[data-theme="light"] .nav-logo { color: var(--roast); }
     nav[data-theme="dark"] .nav-logo { color: var(--cream); }
-    nav ul { display: flex; gap: 2.5rem; list-style: none; }
+    nav ul { display: flex; gap: 2.5rem; list-style: none; flex-wrap: wrap; max-width: 100%; }
     nav a { text-decoration: none; }
     .nav-pill {
       font-family: 'DM Mono', monospace;
