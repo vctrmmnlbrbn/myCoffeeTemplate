@@ -60,10 +60,11 @@
       font-family: 'Playfair Display', serif;
       font-size: 1.25rem; font-weight: 900;
       letter-spacing: 0.04em;
-      color: var(--espresso);
+      color: var(--cream);
       text-decoration: none;
     }
     .nav-logo span { color: var(--caramel); }
+    nav.nav-solid .nav-logo { color: var(--roast); }
     nav ul { display: flex; gap: 2.5rem; list-style: none; }
     nav a { text-decoration: none; }
     .nav-pill {
@@ -1034,10 +1035,12 @@
         nav.style.background = 'rgba(250,246,240,0.92)';
         nav.style.backdropFilter = 'blur(12px)';
         nav.style.boxShadow = '0 1px 0 rgba(28,17,10,0.08)';
+        nav.classList.add('nav-solid');
       } else {
         nav.style.background = 'transparent';
         nav.style.backdropFilter = 'none';
         nav.style.boxShadow = 'none';
+        nav.classList.remove('nav-solid');
       }
     });
   </script>
