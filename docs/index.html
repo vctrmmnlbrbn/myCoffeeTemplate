@@ -66,7 +66,7 @@
     .nav-logo span { color: var(--caramel); }
     nav ul { display: flex; gap: 2.5rem; list-style: none; }
     nav a { text-decoration: none; }
-    nav ul a {
+    .nav-pill {
       font-family: 'DM Mono', monospace;
       font-size: 0.72rem; letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -77,7 +77,7 @@
       display: inline-block;
       transition: background 0.3s, color 0.3s, transform 0.2s;
     }
-    nav ul a:hover {
+    .nav-pill:hover {
       background: var(--gold);
       color: var(--cream);
       transform: translateY(-1px);
@@ -623,7 +623,7 @@
     @media (max-width: 900px) {
       nav { padding: 1rem 1.5rem; }
       nav ul { gap: 0.8rem; flex-wrap: wrap; justify-content: flex-end; }
-      nav ul a { font-size: 0.62rem; padding: 0.38rem 0.75rem; }
+      .nav-pill { font-size: 0.62rem; padding: 0.38rem 0.75rem; }
       .hero-left { padding: 6rem 2.5rem 4rem; }
       .about-content { padding: 4.5rem 2.5rem; }
       .menu-section, .experience, .testimonials, footer { padding-left: 2.5rem; padding-right: 2.5rem; }
@@ -657,10 +657,10 @@
   <nav>
     <a href="#" class="nav-logo">Ember<span>&</span>Ground</a>
     <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#menu">Menu</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#visit">Visit</a></li>
+      <li><a class="nav-pill" href="#about">About</a></li>
+      <li><a class="nav-pill" href="#menu">Menu</a></li>
+      <li><a class="nav-pill" href="#gallery">Gallery</a></li>
+      <li><a class="nav-pill" href="#visit">Visit</a></li>
     </ul>
   </nav>
 
