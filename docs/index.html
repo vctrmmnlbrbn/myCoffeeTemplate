@@ -54,7 +54,7 @@
       position: fixed; top: 0; width: 100%; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.4rem 3.5rem;
-      mix-blend-mode: multiply;
+      mix-blend-mode: normal;
     }
     .nav-logo {
       font-family: 'Playfair Display', serif;
@@ -64,7 +64,8 @@
       text-decoration: none;
     }
     .nav-logo span { color: var(--caramel); }
-    nav.nav-solid .nav-logo { color: var(--roast); }
+    nav[data-theme="light"] .nav-logo { color: var(--roast); }
+    nav[data-theme="dark"] .nav-logo { color: var(--cream); }
     nav ul { display: flex; gap: 2.5rem; list-style: none; }
     nav a { text-decoration: none; }
     .nav-pill {
@@ -73,6 +74,7 @@
       text-transform: uppercase;
       color: var(--cream);
       background: var(--caramel);
+      opacity: 1;
       padding: 0.45rem 0.95rem;
       border-radius: 999px;
       display: inline-block;
@@ -666,7 +668,7 @@
   </nav>
 
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" data-nav-theme="dark">
     <div class="hero-left">
       <div class="hero-grain"></div>
       <div class="hero-tagline">Est. 2019 — Specialty Coffee</div>
@@ -720,7 +722,7 @@
   </div>
 
   <!-- ABOUT -->
-  <section class="about" id="about">
+  <section class="about" id="about" data-nav-theme="light">
     <div class="about-img-col reveal">
       <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800&q=80" alt="Barista at work"/>
       <div class="about-img-label">Our Craft</div>
@@ -748,7 +750,7 @@
   </section>
 
   <!-- MENU -->
-  <section class="menu-section" id="menu">
+  <section class="menu-section" id="menu" data-nav-theme="dark">
     <div class="menu-header reveal">
       <div>
         <div class="section-label">What We Serve</div>
@@ -797,7 +799,7 @@
   </section>
 
   <!-- EXPERIENCE -->
-  <section class="experience">
+  <section class="experience" data-nav-theme="light">
     <div class="exp-header">
       <div class="section-label reveal">Why Guests Return</div>
       <h2 class="section-title reveal reveal-delay-1">The <em>Ember & Ground</em> Experience</h2>
@@ -827,7 +829,7 @@
   </section>
 
   <!-- GALLERY -->
-  <section class="gallery" id="gallery">
+  <section class="gallery" id="gallery" data-nav-theme="light">
     <div class="gallery-item">
       <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=700&q=80" alt="Coffee shop interior"/>
       <div class="gallery-overlay"></div>
@@ -859,7 +861,7 @@
   </section>
 
   <!-- TESTIMONIALS -->
-  <section class="testimonials">
+  <section class="testimonials" data-nav-theme="light">
     <div class="test-header">
       <div class="section-label reveal">What Guests Say</div>
       <h2 class="section-title reveal reveal-delay-1">Heard over a<br/><em>good cup.</em></h2>
@@ -905,7 +907,7 @@
   </section>
 
   <!-- VISIT -->
-  <section class="visit" id="visit">
+  <section class="visit" id="visit" data-nav-theme="dark">
     <div class="visit-map">
       <div class="map-placeholder">
         <div class="map-pin">📍</div>
@@ -1028,21 +1030,17 @@
     }, { threshold: 0.12 });
     reveals.forEach(el => observer.observe(el));
 
-    // Nav background on scroll
+    // Nav theme based on section brightness
     const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 80) {
-        nav.style.background = 'rgba(250,246,240,0.92)';
-        nav.style.backdropFilter = 'blur(12px)';
-        nav.style.boxShadow = '0 1px 0 rgba(28,17,10,0.08)';
-        nav.classList.add('nav-solid');
-      } else {
-        nav.style.background = 'transparent';
-        nav.style.backdropFilter = 'none';
-        nav.style.boxShadow = 'none';
-        nav.classList.remove('nav-solid');
-      }
-    });
+    const themedSections = document.querySelectorAll('[data-nav-theme]');
+    const navThemeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          nav.dataset.theme = entry.target.getAttribute('data-nav-theme');
+        }
+      });
+    }, { threshold: 0.2, rootMargin: '-35% 0px -55% 0px' });
+    themedSections.forEach(section => navThemeObserver.observe(section));
   </script>
 </body>
 </html>
