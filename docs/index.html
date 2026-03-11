@@ -46,6 +46,12 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.4rem 3.5rem;
       mix-blend-mode: normal;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    nav.nav-hidden {
+      transform: translateY(-120%);
+      opacity: 0;
+      pointer-events: none;
     }
     .nav-logo {
       font-family: 'Playfair Display', serif;
@@ -601,7 +607,6 @@
 
     /* RESPONSIVE */
     @media (max-width: 1100px) {
-      nav { display: none; }
       .hero { grid-template-columns: 1fr; }
       .hero-right { min-height: 55vh; }
       .about { grid-template-columns: 1fr; }
@@ -1029,6 +1034,20 @@
       });
     }, { threshold: 0.2, rootMargin: '-35% 0px -55% 0px' });
     themedSections.forEach(section => navThemeObserver.observe(section));
+
+    // Hide nav on scroll down, show on scroll up
+    let lastScrollY = window.scrollY;
+    window.addEventListener('scroll', () => {
+      const currentY = window.scrollY;
+      const hideAfter = 120;
+      if (currentY > hideAfter && currentY > lastScrollY + 5) {
+        nav.classList.add('nav-hidden');
+      } else if (currentY < lastScrollY - 5) {
+        nav.classList.remove('nav-hidden');
+      }
+      if (currentY <= hideAfter) { nav.classList.remove('nav-hidden'); }
+      lastScrollY = currentY;
+    }, { passive: true });
   </script>
 </body>
 </html>
